@@ -81,6 +81,7 @@ int _dummy_simulated_signal;
 
 #else
 
+#include <sys/signal.h>
 #include <errno.h>
 #include <signal.h>
 #include <stddef.h>

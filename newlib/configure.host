@@ -55,7 +55,7 @@ newlib_cflags="-D_LIBC"
 libm_machine_dir=
 machine_dir=
 shared_machine_dir=
-sys_dir=
+sys_dir=frosted
 posix_dir=
 signal_dir=signal
 stdio_dir=stdio
@@ -466,7 +466,7 @@ case "${host}" in
 	have_crt0="no"
 	;;
   arm*-*-*)
-	sys_dir=arm
+	sys_dir=frosted
 	if [ "x${newlib_may_supply_syscalls}" = "xno" ] ; then
 	  have_crt0="no"
 	fi

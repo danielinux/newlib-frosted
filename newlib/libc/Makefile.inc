@@ -59,7 +59,10 @@ include %D%/syscalls/Makefile.inc
 include %D%/iconv/Makefile.inc
 include %D%/xdr/Makefile.inc
 include %D%/ssp/Makefile.inc
-include %D%/sys/Makefile.inc
+#include %D%/sys/Makefile.inc
+
+## sys = Frosted OS
+include %D%/sys/frosted/Makefile.inc
 ## NB: Machine must be last!  See comment block above.
 include %D%/machine/Makefile.inc
 

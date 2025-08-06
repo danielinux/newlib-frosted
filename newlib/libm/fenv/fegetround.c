@@ -62,5 +62,5 @@ the file <<sys/fenv.h>> to see the status for your target.
  */
 int fegetround(void)
 {
-  return -ENOTSUP;
+  return -EOPNOTSUPP;
 }

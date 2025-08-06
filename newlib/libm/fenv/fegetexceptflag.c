@@ -64,5 +64,5 @@ the file <<sys/fenv.h>> to see the status for your target.
  */
 int fegetexceptflag(fexcept_t *flagp, int excepts)
 {
-  return -ENOTSUP;
+  return -EOPNOTSUPP;
 }

@@ -55,7 +55,7 @@ abort (void)
 
   while (1)
     {
-      raise (SIGABRT);
+      kill(getpid(), SIGABRT);
       _exit (1);
     }
 }

@@ -41,7 +41,7 @@ dnl indicates whether to run configure within the testsuite subdirectory
 config_testsuite=true
 
 dnl indicates whether to run configure within the libnosys subdirectory
-config_libnosys=true
+config_libnosys=false
 
 host_makefile_frag=${srcdir}/config/default.mh
 target_makefile_frag=${srcdir}/config/default.mt
@@ -79,6 +79,10 @@ case "${target}" in
   fido-*-* | m68*-*-*)
 	AC_CONFIG_FILES([m68k/Makefile])
 	subdirs="$subdirs m68k"
+	;;
+  arm*-*-frosted | arm*-frosted-*)
+	AC_CONFIG_FILES([arm-frosted/Makefile])
+    subdirs="$subdirs arm-frosted"
 	;;
   hppa*-*-pro*)
 	AC_CONFIG_FILES([pa/Makefile])
@@ -190,6 +194,7 @@ case "${target}" in
 	;;
   arm*-*-elf | arm*-*-coff | arm*-*-*)
 	config_arm=true
+    subdirs="$subdirs arm"
 	;;
   spu-*-elf)
 	AC_CONFIG_FILES([spu/Makefile])

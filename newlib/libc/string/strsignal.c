@@ -108,7 +108,7 @@ strsignal (int signal)
       buffer = "IOT trap";
       break;
 #endif
-#ifdef SIGEMT
+#if defined(SIGEMT) && (SIGEMT != SIGBUS)
     case SIGEMT:
       buffer = "EMT trap";
       break;
@@ -239,7 +239,7 @@ strsignal (int signal)
       buffer = "Profiling timer expired";
       break;
 #endif
-#if defined(SIGLOST) && SIGLOST != SIGPWR
+#if defined(SIGLOST) && SIGLOST != SIGPWR && SIGLOST != SIGIO
     case SIGLOST:
       buffer = "Resource lost";
       break;

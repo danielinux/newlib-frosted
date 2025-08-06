@@ -1,33 +1,18 @@
-## Process this file with automake to generate Makefile.in
-
-AUTOMAKE_OPTIONS = cygnus
-
-INCLUDES = $(NEWLIB_CFLAGS) $(CROSS_CFLAGS) $(TARGET_CFLAGS) -Ifrosted-headers/include
-
-AM_CCASFLAGS = $(INCLUDES)
-
-noinst_LIBRARIES = lib.a
-
-# crt0.o comes from libgloss
-lib_a_SOURCES = \
-	accept.c bind.c chdir.c close.c closedir.c connect.c dirname.c\
-	dup2.c dup.c errno.c exec.c exit.c fgets.c free.c fcntl.c getaddrinfo.c getcwd.c \
-	gethostname.c getlogin.c getpeername.c getpid.c getppid.c getpriority.c getsockname.c \
-   	getsockopt.c gettimeofday.c grp.c inet.c ioctl.c \
-	isatty.c kill.c link.c listen.c  lseek.c malloc.c malloc_trim.c mkdir.c \
-	mount.c mutex.c mutex_init.c open.c opendir.c pipe.c \
-	poll.c printf.c pthread.c ptrace.c pty.c pwd.c read.c readdir.c reboot.c recvfrom.c resource.c sched.c select.c \
-	semaphore.c sem_init.c sendto.c setpriority.c setsid.c setsockopt.c shutdown.c sigaction.c signal.c \
-	sigprocmask.c sigsuspend.c sleep.c socket.c stat.c svc.S syscall.c syscalls.c tcgetattr.c \
-	tcsendbreak.c tcsetattr.c truncate.c ttyname.c uid.c umask.c \
-	umount.c unlink.c uname.c vfork.c wait.c waitpid.c write.c stubs.c readlink.c realpath.c \
-	frosted-headers/sys/frosted_syscalls.c 
+libc_a_SOURCES =  %D%/accept.c %D%/bind.c %D%/chdir.c %D%/close.c %D%/closedir.c %D%/connect.c %D%/dirname.c \
+            %D%/dup2.c %D%/dup.c %D%/errno.c %D%/exec.c %D%/exit.c %D%/fgets.c %D%/free.c %D%/fcntl.c \
+            %D%/getaddrinfo.c %D%/getcwd.c %D%/gethostname.c %D%/getlogin.c %D%/getpeername.c %D%/getpid.c \
+            %D%/getppid.c %D%/getpriority.c %D%/getsockname.c %D%/getsockopt.c %D%/gettimeofday.c \
+            %D%/grp.c %D%/inet.c %D%/ioctl.c %D%/isatty.c %D%/kill.c %D%/link.c \
+            %D%/listen.c %D%/lseek.c %D%/malloc.c %D%/malloc_trim.c %D%/mkdir.c %D%/mount.c \
+            %D%/mutex.c %D%/mutex_init.c %D%/open.c %D%/opendir.c %D%/pipe.c %D%/poll.c %D%/printf.c \
+            %D%/pthread.c %D%/ptrace.c %D%/pty.c %D%/pwd.c %D%/read.c %D%/readdir.c %D%/reboot.c \
+            %D%/recvfrom.c %D%/resource.c %D%/sched.c %D%/select.c %D%/semaphore.c %D%/sem_init.c %D%/sendto.c \
+            %D%/setpriority.c %D%/setsid.c %D%/setsockopt.c %D%/shutdown.c %D%/sigaction.c %D%/signal.c \
+            %D%/sigprocmask.c %D%/sigsuspend.c %D%/sleep.c %D%/socket.c %D%/stat.c %D%/svc.S \
+            %D%/syscall.c %D%/syscalls.c %D%/tcgetattr.c %D%/tcsendbreak.c %D%/tcsetattr.c %D%/truncate.c \
+            %D%/ttyname.c %D%/uid.c %D%/umask.c %D%/umount.c %D%/unlink.c %D%/uname.c \
+            %D%/vfork.c %D%/wait.c %D%/waitpid.c %D%/write.c %D%/stubs.c %D%/readlink.c \
+            %D%/realpath.c
 
 
-lib_a_CCASFLAGS = $(AM_CCASFLAGS)
-lib_a_CFLAGS = $(AM_CFLAGS)
 
-all-local: crt0.o crtn.o
-
-ACLOCAL_AMFLAGS = -I ../../.. -I ../../../..
-CONFIG_STATUS_DEPENDENCIES = $(newlib_basedir)/configure.host

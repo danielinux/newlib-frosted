@@ -12,7 +12,7 @@ extern int errno;
 
 int
 _getentropy (void *buf,
-        size_t buflen)
+        unsigned int buflen)
 {
   errno = ENOSYS;
   return -1;

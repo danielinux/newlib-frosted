@@ -37,7 +37,7 @@ __stack_chk_fail (void)
 {
   char msg[] = "*** stack smashing detected ***: terminated\n";
   write (2, msg, strlen (msg));
-  raise (SIGABRT);
+  kill(getpid(), SIGABRT);
   _exit (127);
 }
 

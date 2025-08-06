@@ -641,8 +641,7 @@ PACKAGE_VERSION
 PACKAGE_TARNAME
 PACKAGE_NAME
 PATH_SEPARATOR
-SHELL
-ARM_OBJTYPE'
+SHELL'
 ac_subst_files='host_makefile_frag'
 ac_user_opts='
 enable_option_checking
@@ -2046,7 +2045,6 @@ else
   RANLIB="$ac_cv_prog_RANLIB"
 fi
 
-LIB_AM_PROG_AS
 
 host_makefile_frag=${srcdir}/../config/ppc.mh
 

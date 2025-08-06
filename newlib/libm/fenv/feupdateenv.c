@@ -68,5 +68,5 @@ the file <<sys/fenv.h>> to see the status for your target.
  */
 int feupdateenv(const fenv_t *envp)
 {
-  return -ENOTSUP;
+  return -EOPNOTSUPP;
 }

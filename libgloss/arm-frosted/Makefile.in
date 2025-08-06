@@ -38,23 +38,32 @@ INSTALL = @INSTALL@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_DATA = @INSTALL_DATA@
 
-SHELL =	/bin/sh
+SHELL = /bin/sh
+
+mkinstalldirs = $(SHELL) $(srcroot)/mkinstalldirs
 
 CC = @CC@
 
 AS = @AS@
-
 AR = @AR@
-
 LD = @LD@
-
 RANLIB = @RANLIB@
+AR_FLAGS = rc
 
-OBJDUMP = `t='$(program_transform_name)'; echo objdump | sed -e $$t`
-OBJCOPY = `t='$(program_transform_name)'; echo objcopy | sed -e $$t`
+OBJDUMP = `if [ -f ${objroot}/../binutils/objdump ] ; \
+	then echo ${objroot}/../binutils/objdump ; \
+	else t='$(program_transform_name)'; echo objdump | sed -e $$t ; fi`
+OBJCOPY = `if [ -f ${objroot}/../binutils/objcopy ] ; \
+	then echo ${objroot}/../binutils/objcopy ; \
+	else t='$(program_transform_name)'; echo objcopy | sed -e $$t ; fi`
 
 # object files needed
-OBJS = crt0.o
+OBJS = crt0.o crtn.o frosted_syscalls.o syscall.o syscalls.o errno.o svc.o \
+	   exec.o link.o lseek.o exit.o kill.o gettimeofday.o sysconf.o stat.o \
+	   readlink.o dup.o dup2.o vfork.o getcwd.o getpid.o getppid.o \
+	   setsid.o chdir.o waitpid.o sleep.o pipe.o poll.o sigaction.o truncate.o \
+	   malloc.o
+
 
 # Object files specific to particular targets.
 EVALOBJS = ${OBJS}
@@ -113,8 +122,95 @@ libgloss.a: $(EVALOBJS)
 crti.o: $(srcdir)/crti.S
 	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/crti.S -c -o crti.o
 
-crtn.o: $(srcdir)/crtn.S
-	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/crtn.S -c -o crtn.o
+crtn.o: $(srcdir)/crtn.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/crtn.c -c -o crtn.o
+
+errno.o: $(srcdir)/errno.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/errno.c -c -o errno.o
+
+sysconf.o: $(srcdir)/sysconf.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/sysconf.c -c -o sysconf.o
+
+syscall.o: $(srcdir)/syscall.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/syscall.c -c -o syscall.o
+
+svc.o: $(srcdir)/svc.S
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/svc.S -c -o svc.o
+
+syscalls.o: $(srcdir)/syscalls.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/syscalls.c -c -o syscalls.o
+
+frosted_syscalls.o: $(srcdir)/frosted_syscalls.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/frosted_syscalls.c -c -o frosted_syscalls.o
+
+exec.o: $(srcdir)/exec.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/exec.c -c -o exec.o
+
+stat.o: $(srcdir)/stat.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/stat.c -c -o stat.o
+
+exit.o: $(srcdir)/exit.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/exit.c -c -o exit.o
+
+kill.o: $(srcdir)/kill.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/kill.c -c -o kill.o
+
+gettimeofday.o: $(srcdir)/gettimeofday.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/gettimeofday.c -c -o gettimeofday.o
+
+link.o: $(srcdir)/link.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/link.c -c -o link.o
+
+readlink.o: $(srcdir)/readlink.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/readlink.c -c -o readlink.o
+
+lseek.o: $(srcdir)/lseek.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/lseek.c -c -o lseek.o
+
+dup2.o: $(srcdir)/dup2.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/dup2.c -c -o dup2.o
+
+dup.o: $(srcdir)/dup.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/dup.c -c -o dup.o
+
+vfork.o: $(srcdir)/vfork.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/vfork.c -c -o vfork.o
+
+getcwd.o: $(srcdir)/getcwd.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/getcwd.c -c -o getcwd.o
+
+getpid.o: $(srcdir)/getpid.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/getpid.c -c -o getpid.o
+
+getppid.o: $(srcdir)/getppid.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/getppid.c -c -o getppid.o
+
+setsid.o: $(srcdir)/setsid.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/setsid.c -c -o setsid.o
+
+chdir.o: $(srcdir)/chdir.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/chdir.c -c -o chdir.o
+
+sleep.o: $(srcdir)/sleep.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/sleep.c -c -o sleep.o
+
+waitpid.o: $(srcdir)/waitpid.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/waitpid.c -c -o waitpid.o
+
+pipe.o: $(srcdir)/pipe.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/pipe.c -c -o pipe.o
+
+poll.o: $(srcdir)/poll.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/poll.c -c -o poll.o
+
+sigaction.o: $(srcdir)/sigaction.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/sigaction.c -c -o sigaction.o
+
+truncate.o: $(srcdir)/truncate.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/truncate.c -c -o truncate.o
+
+malloc.o: $(srcdir)/malloc.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/malloc.c -c -o malloc.o
 
 crt1.o: $(srcdir)/crt0.S
 	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/crt0.S -c -o crt1.o
@@ -130,11 +226,19 @@ gcrt2.o: $(srcdir)/crt0.S
 
 doc:	
 
+
+install: $($(CPU)_INSTALL)
+	${mkinstalldirs} ${DESTDIR}${tooldir}/lib${MULTISUBDIR}
+	for c in $(CRT0); do \
+	  $(INSTALL_DATA) $$c $(DESTDIR)$(tooldir)/lib${MULTISUBDIR}/$$c ; \
+	done; 
+	$(INSTALL_DATA) $(SIM_BSP) $(DESTDIR)$(tooldir)/lib${MULTISUBDIR}/$(SIM_BSP)
+
 clean mostlyclean:
-	rm -f $(OUTPUTS) *.i *~ *.o *-test *.srec *.dis *.map *.x
+	rm -f *.o *.a
 
 distclean maintainer-clean realclean: clean
-	rm -f Makefile config.status $(OUTPUTS)
+	rm -f Makefile
 
 .PHONY: install info install-info clean-info
 install:
@@ -146,8 +250,5 @@ info:
 install-info:
 clean-info:
 
-Makefile: Makefile.in config.status @host_makefile_frag_path@
-	$(SHELL) config.status
-
-config.status: configure
-	$(SHELL) config.status --recheck
+Makefile: Makefile.in ../config.status
+	cd .. && $(SHELL) config.status

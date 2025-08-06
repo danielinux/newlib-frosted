@@ -3,6 +3,7 @@
 #ifndef SIGNAL_H_INCLUDED
 #define SIGNAL_H_INCLUDED
 #include <sys/types.h>
+#include <sys/signal.h>
 #include <stdint.h>
 
 
@@ -83,6 +84,7 @@ struct sigevent {
   union sigval     sigev_value;                /* Signal value */
 };
 
+#if 0
 struct sigaction {
     void     (*sa_handler)(int);
     void     (*sa_sigaction)(int, siginfo_t *, void *);
@@ -91,9 +93,9 @@ struct sigaction {
     void     (*sa_restorer)(void);
 };
 
+int sigfillset(sigset_t *set);
 int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact);
 int sigemptyset(sigset_t *set);
-int sigfillset(sigset_t *set);
 int sigaddset(sigset_t *set, int signum);
 int sigdelset(sigset_t *set, int signum);
 int sigismember(const sigset_t *set, int signum);
@@ -101,6 +103,10 @@ int sigismember(const sigset_t *set, int signum);
 int sigisemptyset(const sigset_t *set);
 int sigorset(sigset_t *dest, const sigset_t *left, const sigset_t *right);
 int sigandset(sigset_t *dest, const sigset_t *left, const sigset_t *right);
+#endif
+
+#define SIG_ERR ((sighandler_t)-1)
+
 
 /* Process mask functions */
 #define SIG_SETMASK 0	/* set mask with sigprocmask() */

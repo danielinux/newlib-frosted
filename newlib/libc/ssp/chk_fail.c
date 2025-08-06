@@ -8,6 +8,6 @@ __chk_fail(void)
 {
   char msg[] = "*** buffer overflow detected ***: terminated\n";
   write (2, msg, strlen (msg));
-  raise (SIGABRT);
+  kill(getpid(),SIGABRT);
   _exit (127);
 }

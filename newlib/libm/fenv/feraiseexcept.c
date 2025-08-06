@@ -63,5 +63,5 @@ the file <<sys/fenv.h>> to see the status for your target.
  */
 int feraiseexcept(int excepts)
 {
-  return (excepts  ?  -ENOTSUP : 0);
+  return (excepts  ?  -EOPNOTSUPP : 0);
 }

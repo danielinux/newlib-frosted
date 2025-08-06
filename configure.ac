@@ -916,43 +916,44 @@ if test x$enable_libgo = x; then
 fi
 
 # Default libgloss CPU subdirectory.
-libgloss_dir="$target_cpu"
+#libgloss_dir="$target_cpu"
+libgloss_dir=arm-frosted
 
-case "${target}" in
-  sh*-*-pe|mips*-*-pe|*arm-wince-pe)
-    libgloss_dir=wince
-    ;;
-  aarch64*-*-* )
-    libgloss_dir=aarch64
-    ;;
-  arm*-*-*)
-    libgloss_dir=arm
-    ;;
-  cris-*-* | crisv32-*-*)
-    libgloss_dir=cris
-    ;;
-  hppa*-*-*)
-    libgloss_dir=pa
-    ;;
-  i[[3456789]]86-*-*)
-    libgloss_dir=i386
-    ;;
-  m68hc11-*-*|m6811-*-*|m68hc12-*-*|m6812-*-*)
-    libgloss_dir=m68hc11
-    ;;
-  m68*-*-* | fido-*-*)
-    libgloss_dir=m68k
-    ;;
-  mips*-*-*)
-    libgloss_dir=mips
-    ;;
-  powerpc*-*-*)
-    libgloss_dir=rs6000
-    ;;
-  sparc*-*-*)
-    libgloss_dir=sparc
-    ;;
-esac
+#case "${target}" in
+#  sh*-*-pe|mips*-*-pe|*arm-wince-pe)
+#    libgloss_dir=wince
+#    ;;
+#  aarch64*-*-* )
+#    libgloss_dir=aarch64
+#    ;;
+#  arm*-*-*)
+#    libgloss_dir=arm-frosted
+#    ;;
+#  cris-*-* | crisv32-*-*)
+#    libgloss_dir=cris
+#    ;;
+#  hppa*-*-*)
+#    libgloss_dir=pa
+#    ;;
+#  i[[3456789]]86-*-*)
+#    libgloss_dir=i386
+#    ;;
+#  m68hc11-*-*|m6811-*-*|m68hc12-*-*|m6812-*-*)
+#    libgloss_dir=m68hc11
+#    ;;
+#  m68*-*-* | fido-*-*)
+#    libgloss_dir=m68k
+#    ;;
+#  mips*-*-*)
+#    libgloss_dir=mips
+#    ;;
+#  powerpc*-*-*)
+#    libgloss_dir=rs6000
+#    ;;
+#  sparc*-*-*)
+#    libgloss_dir=sparc
+#    ;;
+#esac
 
 # Disable newlib and libgloss for various target OSes.
 case "${target}" in
@@ -3212,7 +3213,7 @@ case " $target_configdirs " in
 	# Look for startup file, simulator library and maybe linker script.
 	FLAGS_FOR_TARGET=$FLAGS_FOR_TARGET' -B$$r/$(TARGET_SUBDIR)/libgloss/'"$libgloss_dir"
 	# Look for libnosys.a in case the target needs it.
-	FLAGS_FOR_TARGET=$FLAGS_FOR_TARGET' -L$$r/$(TARGET_SUBDIR)/libgloss/libnosys'
+	#FLAGS_FOR_TARGET=$FLAGS_FOR_TARGET' -L$$r/$(TARGET_SUBDIR)/libgloss/libnosys'
 	# Most targets have the linker script in the source directory.
 	FLAGS_FOR_TARGET=$FLAGS_FOR_TARGET' -L$$s/libgloss/'"$libgloss_dir"
 	;;

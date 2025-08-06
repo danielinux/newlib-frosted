@@ -1,5 +1,8 @@
 /* Frosted system call API */
 #include <stdio.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <stdlib.h>
 #ifndef _INCLUDE_SYSCALLS
 #define _INCLUDE_SYSCALLS
 
@@ -9,7 +12,7 @@ struct timeval;
 struct timezone;
 typedef void DIR;
 
-void _exit();
+void _exit(int);
 int fork(void);
 int fstat(int fildes, struct stat *st);
 int isatty(int file);

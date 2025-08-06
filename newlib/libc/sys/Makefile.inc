@@ -1,3 +1,5 @@
+include %D/frosted/Makefile.inc
+
 if HAVE_LIBC_SYS_A29KHIF_DIR
 include %D%/a29khif/Makefile.inc
 endif

@@ -26,7 +26,6 @@ AC_SUBST(AR)
 LD=${LD-ld}
 AC_SUBST(LD)
 AC_PROG_RANLIB
-LIB_AM_PROG_AS
 
 host_makefile_frag=${srcdir}/../config/ppc.mh
 

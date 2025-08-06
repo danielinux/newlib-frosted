@@ -66,7 +66,7 @@ _getentropy_fail(void)
 #ifdef _ARC4RANDOM_GETENTROPY_FAIL
 	_ARC4RANDOM_GETENTROPY_FAIL();
 #else
-	raise(SIGKILL);
+	kill(getpid(),SIGKILL);
 #endif
 }
 

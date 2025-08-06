@@ -166,70 +166,15 @@ typedef struct sigaltstack {
 #define sigfillset(what)    (*(what) = ~(0), 0)
 #define sigismember(what,sig) (((*(what)) & (1<<(sig))) != 0)
 
-int _EXFUN(sigprocmask, (int how, const sigset_t *set, sigset_t *oset));
+int sigprocmask(int how, const sigset_t *set, sigset_t *oset);
 
 #if defined(_POSIX_THREADS)
-int _EXFUN(pthread_sigmask, (int how, const sigset_t *set, sigset_t *oset));
+int pthread_sigmask(int how, const sigset_t *set, sigset_t *oset);
 #endif
 
-#if defined(__CYGWIN__) || defined(__rtems__)
-#undef sigaddset
-#undef sigdelset
-#undef sigemptyset
-#undef sigfillset
-#undef sigismember
 
-#ifdef _COMPILING_NEWLIB
-int _EXFUN(_kill, (pid_t, int));
-#endif /* _COMPILING_NEWLIB */
-#endif /* __CYGWIN__ || __rtems__ */
+int kill(pid_t, int);
 
-int _EXFUN(kill, (pid_t, int));
-
-#if defined(__CYGWIN__) || defined(__rtems__)
-int _EXFUN(killpg, (pid_t, int));
-int _EXFUN(sigaction, (int, const struct sigaction *, struct sigaction *));
-int _EXFUN(sigaddset, (sigset_t *, const int));
-int _EXFUN(sigdelset, (sigset_t *, const int));
-int _EXFUN(sigismember, (const sigset_t *, int));
-int _EXFUN(sigfillset, (sigset_t *));
-int _EXFUN(sigemptyset, (sigset_t *));
-int _EXFUN(sigpending, (sigset_t *));
-int _EXFUN(sigsuspend, (const sigset_t *));
-int _EXFUN(sigpause, (int));
-
-#if defined(__CYGWIN__) || defined(__rtems__)
-#if __BSD_VISIBLE || __XSI_VISIBLE || __POSIX_VISIBLE >= 200112
-int _EXFUN(sigaltstack, (const stack_t *__restrict, stack_t *__restrict));
-#endif
-#endif
-
-#if defined(_POSIX_THREADS)
-#ifdef __CYGWIN__
-#  ifndef _CYGWIN_TYPES_H
-#    error You need the winsup sources or a cygwin installation to compile the cygwin version of newlib.
-#  endif
-#endif
-int _EXFUN(pthread_kill, (pthread_t thread, int sig));
-#endif
-
-#if defined(_POSIX_REALTIME_SIGNALS)
-
-/*  3.3.8 Synchronously Accept a Signal, P1003.1b-1993, p. 76
-    NOTE: P1003.1c/D10, p. 39 adds sigwait().  */
-
-int _EXFUN(sigwaitinfo, (const sigset_t *set, siginfo_t *info));
-int _EXFUN(sigtimedwait,
-  (const sigset_t *set, siginfo_t *info, const struct timespec  *timeout)
-);
-int _EXFUN(sigwait, (const sigset_t *set, int *sig));
-
-/*  3.3.9 Queue a Signal to a Process, P1003.1b-1993, p. 78 */
-int _EXFUN(sigqueue, (pid_t pid, int signo, const union sigval value));
-
-#endif /* defined(_POSIX_REALTIME_SIGNALS) */
-
-#endif /* defined(__CYGWIN__) || defined(__rtems__) */
 
 /* #endif __STRICT_ANSI__ */
 
