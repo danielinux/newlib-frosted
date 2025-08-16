@@ -41,6 +41,16 @@ int clearenv(void)
 
 
 /*
+ * Frosted version of sync (STUB).
+ */
+
+void sync(void)
+{
+    errno = ENOSYS;
+}
+
+
+/*
  * Frosted version of fnmatch (STUB).
  */
 

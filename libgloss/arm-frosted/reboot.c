@@ -4,8 +4,9 @@
 
 #include <errno.h>
 #include <stdint.h>
-#include "sys/frosted-io.h"
 #include "sys/frosted.h"
+#include "sys/frosted-io.h"
+
 extern int sys_reboot(uint32_t, int, uint32_t);
 
 static int do_reboot(uint32_t fadeoff, int cmd, uint32_t interval)

@@ -62,7 +62,10 @@ OBJS = crt0.o crtn.o frosted_syscalls.o syscall.o syscalls.o errno.o svc.o \
 	   exec.o link.o lseek.o exit.o kill.o gettimeofday.o sysconf.o stat.o \
 	   readlink.o dup.o dup2.o vfork.o getcwd.o getpid.o getppid.o \
 	   setsid.o chdir.o waitpid.o sleep.o pipe.o poll.o sigaction.o truncate.o \
-	   malloc.o
+	   malloc.o opendir.o readdir.o closedir.o reboot.o ioctl.o socket.o inet.o \
+	   listen.o accept.o bind.o connect.o recvfrom.o sendto.o getsockname.o \
+	   getpeername.o setsockopt.o getsockopt.o \
+	   tcsetattr.o tcgetattr.o tcsendbreak.o unlink.o stubs.o mount.o umount.o
 
 
 # Object files specific to particular targets.
@@ -211,6 +214,78 @@ truncate.o: $(srcdir)/truncate.c
 
 malloc.o: $(srcdir)/malloc.c
 	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/malloc.c -c -o malloc.o
+
+opendir.o: $(srcdir)/opendir.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/opendir.c -c -o opendir.o
+
+readdir.o: $(srcdir)/readdir.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/readdir.c -c -o readdir.o
+
+closedir.o: $(srcdir)/closedir.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/closedir.c -c -o closedir.o
+
+reboot.o: $(srcdir)/reboot.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/reboot.c -c -o reboot.o
+
+socket.o: $(srcdir)/socket.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/socket.c -c -o socket.o
+
+ioctl.o: $(srcdir)/ioctl.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/ioctl.c -c -o ioctl.o
+
+inet.o: $(srcdir)/inet.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/inet.c -c -o inet.o
+
+listen.o: $(srcdir)/listen.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/listen.c -c -o listen.o
+	
+bind.o: $(srcdir)/bind.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/bind.c -c -o bind.o
+
+accept.o: $(srcdir)/accept.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/accept.c -c -o accept.o
+
+connect.o: $(srcdir)/connect.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/connect.c -c -o connect.o
+
+recvfrom.o: $(srcdir)/recvfrom.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/recvfrom.c -c -o recvfrom.o
+
+sendto.o: $(srcdir)/sendto.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/sendto.c -c -o sendto.o
+
+getpeername.o: $(srcdir)/getpeername.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/getpeername.c -c -o getpeername.o
+
+getsockname.o: $(srcdir)/getsockname.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/getsockname.c -c -o getsockname.o
+
+getsockopt.o: $(srcdir)/getsockopt.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/getsockopt.c -c -o getsockopt.o
+	
+setsockopt.o: $(srcdir)/setsockopt.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/setsockopt.c -c -o setsockopt.o
+
+tcsetattr.o: $(srcdir)/tcsetattr.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/tcsetattr.c -c -o tcsetattr.o
+
+tcgetattr.o: $(srcdir)/tcgetattr.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/tcgetattr.c -c -o tcgetattr.o
+
+tcsendbreak.o: $(srcdir)/tcsendbreak.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/tcsendbreak.c -c -o tcsendbreak.o
+
+unlink.o: $(srcdir)/unlink.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/unlink.c -c -o unlink.o
+
+mount.o: $(srcdir)/mount.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/mount.c -c -o mount.o
+
+umount.o: $(srcdir)/umount.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/umount.c -c -o umount.o
+
+stubs.o: $(srcdir)/stubs.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/stubs.c -c -o stubs.o
 
 crt1.o: $(srcdir)/crt0.S
 	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/crt0.S -c -o crt1.o

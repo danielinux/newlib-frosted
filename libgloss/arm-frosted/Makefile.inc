@@ -31,4 +31,7 @@ multilibtool_LIBRARIES += %D%/libsim.a
 	%D%/unlink.c \
 	%D%/utime.c \
 	%D%/wait.c \
-	%D%/write.c
+	%D%/write.c \
+	%D%/opendir.c \
+    %D%/closedir.c \
+    %D%/readdir.c 

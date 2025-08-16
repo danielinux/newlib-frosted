@@ -1,0 +1,4 @@
+To add files to libgloss: remember to modify Makefile.in and add the rule to
+build the objects. Run autoreconf2.69 -i -f when done.
+
+To build: buildme_frosted.sh

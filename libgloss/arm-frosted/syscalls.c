@@ -22,6 +22,7 @@ int sys_unlink(const char *pathname);
 int sys_getpid(void);
 int sys_getppid(void);
 int sys_seek(int fd, off_t offset, int whence);
+int sys_exec(char *name, char **argv);
 
 
 
@@ -39,12 +40,7 @@ int _close(int fd)
 int _execve_r(struct _reent *ptr, char *name, char **argv, char **env)
 {
     (void)ptr;
-    return execve(name, argv, env);
-}
-
-int _execve(char *name, char **argv, char **env)
-{
-    return execve(name, argv, env);
+    return sys_exec(name, argv);
 }
 
 int _fork_r(struct _reent *ptr)

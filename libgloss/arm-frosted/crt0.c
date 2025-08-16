@@ -15,3 +15,6 @@ void _start(char *argv[]) {
     ex = main(argc, argv);
     exit(ex);
 }
+
+void _fini(void) __attribute__((weak));
+void _fini(void) {}

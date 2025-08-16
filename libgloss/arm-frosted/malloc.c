@@ -12,11 +12,12 @@
 
 extern void* sys_mmap(uint32_t size);
 
-void * _sbrk_r(unsigned int incr)
+void * _sbrk_r(struct _reent *r, unsigned int incr)
 {
     static unsigned char *heap = NULL;
     uint32_t sz;
     void *old_heap = heap;
+    (void *)r;
     if (incr <= 0)
         return NULL;
 

@@ -14,3 +14,8 @@ int wait(int  *status)
     return ret;
 }
 
+int waitpid(int pid, int *status, int options)
+{
+    return sys_waitpid(pid, status, options);
+}
+

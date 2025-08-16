@@ -5,6 +5,7 @@
 #include "sys/frosted.h"
 #include <dirent.h>
 #include <errno.h>
+#include <string.h>
 extern int sys_readdir(DIR *d, struct dirent *ep);
 
 static struct dirent static_ep;

@@ -1,5 +1,7 @@
 #ifndef IOCTL_INCLUDE
 #define IOCTL_INCLUDE
+#include <sys/ioctl.h>
+#include <sys/frosted-io.h>
 
 /* GPIO */
 #define IOCTL_GPIO_DISABLE 0

@@ -10,6 +10,7 @@
 #include <netinet/in.h>
 #include <netdb.h>
 #include <string.h>
+#include <stdlib.h>
 static inline int is_digit(char c)
 {
     if (c < '0' || c > '9')
@@ -103,7 +104,7 @@ char *inet_ntoa(struct in_addr in)
     if (strlen(inet_ntoa_result) < 1)
         return NULL;
 
-    return &inet_ntoa_result;
+    return inet_ntoa_result;
 }
 
 const char *inet_ntop(int af, const void *src, char *dst, socklen_t size)
