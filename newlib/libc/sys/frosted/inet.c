@@ -62,7 +62,7 @@ int inet_aton(const char *ipstr, struct in_addr *ia)
         return 0;
     }
 
-    *ip = htonl(long_from(buf));
+    *ip = long_from(buf);
     return (int)*ip;
 }
 

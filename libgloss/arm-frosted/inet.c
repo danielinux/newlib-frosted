@@ -30,7 +30,10 @@ static inline uint32_t long_from(void *_p)
     return r;
 }
 
-/* Warning: returns 0 on failure. */
+/* Warning: returns 0 on failure.
+ * inet_aton() returns 1 if the supplied string was successfully interpreted,
+ * or 0 if the string is invalid  (errno is not set on error).
+ */
 int inet_aton(const char *ipstr, struct in_addr *ia)
 {
     unsigned char buf[22] = {
@@ -63,8 +66,8 @@ int inet_aton(const char *ipstr, struct in_addr *ia)
         return 0;
     }
 
-    *ip = htonl(long_from(buf));
-    return (int)*ip;
+    *ip = long_from(buf);
+    return 1;
 }
 
 int inet_pton(int af, const char *src, void *dst)
