@@ -8,7 +8,7 @@ mkdir -p build
 cd build
 mkdir -p lib
 
-CFLAGS_FOR_TARGET="-g -Os -mcpu=cortex-m33 -mthumb -mlittle-endian -mthumb-interwork -fPIC -mlong-calls -fno-common -msingle-pic-base -mno-pic-data-is-text-relative -DREENTRANT_SYSCALLS_PROVIDED -D__LINUX_ERRNO_EXTENSIONS__"
+CFLAGS_FOR_TARGET="-g -Os -mcpu=cortex-m33 -mthumb -mlittle-endian -mthumb-interwork -fPIC -mlong-calls -fno-common -msingle-pic-base -mno-pic-data-is-text-relative -DREENTRANT_SYSCALLS_PROVIDED -D__LINUX_ERRNO_EXTENSIONS__ -D__FROSTED__"
  
 export CFLAGS_FOR_TARGET
 

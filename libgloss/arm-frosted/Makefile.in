@@ -284,6 +284,12 @@ mount.o: $(srcdir)/mount.c
 umount.o: $(srcdir)/umount.c
 	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/umount.c -c -o umount.o
 
+mmap.o: $(srcdir)/mmap.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/mmap.c -c -o mmap.o
+
+pthread.o: $(srcdir)/pthread.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/pthread.c -c -o pthread.o
+
 stubs.o: $(srcdir)/stubs.c
 	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/stubs.c -c -o stubs.o
 
