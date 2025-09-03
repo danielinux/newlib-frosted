@@ -24,7 +24,7 @@ int pthread_key_create(pthread_key_t *key, void (*destructor)(void*));
 int pthread_setspecific(pthread_key_t key, const void *value);
 
 /* proxy to sys_pthread_getspecific */
-void *pthread_getspecific(pthread_key_t key);
+void *pthread_getspecific(pthread_key_t *key);
 
 /* Pure libC functions */
 int pthread_attr_init(pthread_attr_t *attr);

@@ -65,7 +65,8 @@ OBJS = crt0.o crtn.o frosted_syscalls.o syscall.o syscalls.o errno.o svc.o \
 	   malloc.o opendir.o readdir.o closedir.o reboot.o ioctl.o socket.o inet.o \
 	   listen.o accept.o bind.o connect.o recvfrom.o sendto.o getsockname.o \
 	   getpeername.o setsockopt.o getsockopt.o \
-	   tcsetattr.o tcgetattr.o tcsendbreak.o unlink.o stubs.o mount.o umount.o
+	   tcsetattr.o tcgetattr.o tcsendbreak.o unlink.o stubs.o mount.o umount.o \
+	   pthread.o mmap.o
 
 
 # Object files specific to particular targets.

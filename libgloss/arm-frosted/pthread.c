@@ -20,7 +20,7 @@ extern int sys_pthread_mutex_unlock(pthread_mutex_t *mutex);
 extern int sys_pthread_kill(pthread_t thread, int sig);
 extern int sys_pthread_getspecific(pthread_key_t *key, uint32_t *value);
 extern int sys_pthread_setspecific(pthread_key_t key, const uint32_t value);
-extern int sys_pthread_key_create(pthread_key_t key, void *destructor);
+extern int sys_pthread_key_create(pthread_key_t *key, void *destructor);
 
 
 
@@ -161,7 +161,7 @@ int pthread_setspecific(pthread_key_t key, const void *value)
 }
 
 /* proxy to sys_pthread_getspecific */
-void *pthread_getspecific(pthread_key_t key)
+void *pthread_getspecific(pthread_key_t *key)
 {
     uint32_t value;
     int ret = sys_pthread_getspecific(key, &value);

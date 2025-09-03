@@ -1,7 +1,7 @@
 /* Frosted version of signals */
 
-#ifndef SIGNAL_H_INCLUDED
-#define SIGNAL_H_INCLUDED
+#ifndef _SIGNAL_H_
+#define _SIGNAL_H_
 #include <sys/types.h>
 #include <sys/signal.h>
 #include <stdint.h>
@@ -49,6 +49,7 @@
 
 
 typedef uint32_t sigset_t;
+
 #define SI_USER    1    /* Sent by a user. kill(), abort(), etc */
 #define SI_QUEUE   2    /* Sent by sigqueue() */
 #define SI_TIMER   3    /* Sent by expiration of a timer_settime() timer */
@@ -84,7 +85,6 @@ struct sigevent {
   union sigval     sigev_value;                /* Signal value */
 };
 
-#if 0
 struct sigaction {
     void     (*sa_handler)(int);
     void     (*sa_sigaction)(int, siginfo_t *, void *);
@@ -93,13 +93,14 @@ struct sigaction {
     void     (*sa_restorer)(void);
 };
 
-int sigfillset(sigset_t *set);
 int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact);
+
+#if 0
+int sigfillset(sigset_t *set);
 int sigemptyset(sigset_t *set);
 int sigaddset(sigset_t *set, int signum);
 int sigdelset(sigset_t *set, int signum);
 int sigismember(const sigset_t *set, int signum);
-
 int sigisemptyset(const sigset_t *set);
 int sigorset(sigset_t *dest, const sigset_t *left, const sigset_t *right);
 int sigandset(sigset_t *dest, const sigset_t *left, const sigset_t *right);
@@ -112,7 +113,9 @@ int sigandset(sigset_t *dest, const sigset_t *left, const sigset_t *right);
 #define SIG_SETMASK 0	/* set mask with sigprocmask() */
 #define SIG_BLOCK 1	/* set of signals to block */
 #define SIG_UNBLOCK 2	/* set of signals to, well, unblock */
-int sigprocmask(int how, const sigset_t *set, sigset_t *oldset);
+
+//int sigprocmask(int how, const sigset_t *set, sigset_t *oldset);
+
 
 /* Signal function */
 typedef void (*sighandler_t)(int);
