@@ -95,7 +95,8 @@ struct sigaction {
 
 int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact);
 
-#if 0
+int example_fn(sigset_t *set);
+
 int sigfillset(sigset_t *set);
 int sigemptyset(sigset_t *set);
 int sigaddset(sigset_t *set, int signum);
@@ -104,9 +105,9 @@ int sigismember(const sigset_t *set, int signum);
 int sigisemptyset(const sigset_t *set);
 int sigorset(sigset_t *dest, const sigset_t *left, const sigset_t *right);
 int sigandset(sigset_t *dest, const sigset_t *left, const sigset_t *right);
-#endif
 
 #define SIG_ERR ((sighandler_t)-1)
+
 
 
 /* Process mask functions */
@@ -119,12 +120,13 @@ int sigandset(sigset_t *dest, const sigset_t *left, const sigset_t *right);
 
 /* Signal function */
 typedef void (*sighandler_t)(int);
+
+typedef sighandler_t _sig_func_ptr;
+
 sighandler_t signal(int signum, sighandler_t handler);
+
 
 /* Kill function */
 int kill(int pid, int sig);
-
-
- 
 
 #endif

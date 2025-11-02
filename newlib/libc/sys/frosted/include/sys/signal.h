@@ -20,15 +20,6 @@ typedef struct sigaltstack {
 #define SIG_BLOCK 1	/* set of signals to block */
 #define SIG_UNBLOCK 2	/* set of signals to, well, unblock */
 
-/* These depend upon the type of sigset_t, which right now 
-   is always a long.. They're in the POSIX namespace, but
-   are not ANSI. */
-#define sigaddset(what,sig) (*(what) |= (1<<(sig)), 0)
-#define sigdelset(what,sig) (*(what) &= ~(1<<(sig)), 0)
-#define sigemptyset(what)   (*(what) = 0, 0)
-#define sigfillset(what)    (*(what) = ~(0), 0)
-#define sigismember(what,sig) (((*(what)) & (1<<(sig))) != 0)
-
 int sigprocmask(int how, const sigset_t *set, sigset_t *oset);
 
 int pthread_sigmask(int how, const sigset_t *set, sigset_t *oset);

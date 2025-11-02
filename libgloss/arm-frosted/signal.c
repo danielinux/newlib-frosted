@@ -2,7 +2,7 @@
 #include <signal.h>
 #include <unistd.h>
 
-typedef void (*sighandler_t)(int);
+
 sighandler_t signal(int signum, sighandler_t handler)
 {
     struct sigaction sa = {};
