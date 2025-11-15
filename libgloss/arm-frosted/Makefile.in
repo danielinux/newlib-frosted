@@ -66,7 +66,7 @@ OBJS = crt0.o crtn.o frosted_syscalls.o syscall.o syscalls.o errno.o svc.o \
 	   listen.o accept.o bind.o connect.o recvfrom.o sendto.o getsockname.o \
 	   getpeername.o setsockopt.o getsockopt.o \
 	   tcsetattr.o tcgetattr.o tcsendbreak.o unlink.o stubs.o mount.o umount.o \
-	   pthread.o mmap.o signal.o
+	   pthread.o mmap.o signal.o ptrace.o
 
 
 # Object files specific to particular targets.
@@ -293,6 +293,9 @@ signal.o: $(srcdir)/signal.c
 
 pthread.o: $(srcdir)/pthread.c
 	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/pthread.c -c -o pthread.o
+
+ptrace.o: $(srcdir)/ptrace.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/ptrace.c -c -o ptrace.o
 
 stubs.o: $(srcdir)/stubs.c
 	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/stubs.c -c -o stubs.o
