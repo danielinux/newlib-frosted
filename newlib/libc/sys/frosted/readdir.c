@@ -5,13 +5,24 @@
 #include "sys/frosted.h"
 #include <dirent.h>
 #include <errno.h>
-extern int sys_readdir(DIR *d, struct dirent *ep);
+#include <stdint.h>
+extern int sys_readdir(int d, struct dirent *ep);
 
 static struct dirent static_ep;
 
 int readdir_r(DIR *d, struct dirent *ep, struct dirent **res)
 {
-    int ret = sys_readdir(d, ep);
+    int fd;
+    int ret;
+
+    if (!d) {
+        errno = EBADF;
+        *res = NULL;
+        return -1;
+    }
+
+    fd = (int)((intptr_t)d - 1);
+    ret = sys_readdir(fd, ep);
     if (ret < 0) {
         errno = 0 - ret;
         *res = NULL;
@@ -23,9 +34,17 @@ int readdir_r(DIR *d, struct dirent *ep, struct dirent **res)
 
 struct dirent *readdir(DIR *d)
 {
+    int fd;
     int ret;
+
+    if (!d) {
+        errno = EBADF;
+        return NULL;
+    }
+
+    fd = (int)((intptr_t)d - 1);
     memset(&static_ep, 0, sizeof(struct dirent));
-    ret = sys_readdir(d, &static_ep);
+    ret = sys_readdir(fd, &static_ep);
     if (ret == 0)
         return &static_ep;
     else

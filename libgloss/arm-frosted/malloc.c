@@ -14,8 +14,16 @@ extern void* sys_mmap(uint32_t size);
 #define PAGE_SIZE 4096u
 #endif
 
+/* Ask the kernel for at least this much per region so wolfSSL/wolfSSH/
+ * micropython heaps don't immediately hit the region cap. The supervisor
+ * ultimately honours any page-aligned size; requesting 16 KB chunks keeps
+ * nano-malloc's region bookkeeping cheap. */
+#ifndef MIN_REGION_BYTES
+#define MIN_REGION_BYTES (16u * 1024u)
+#endif
+
 #ifndef MAX_HEAP_REGIONS
-#define MAX_HEAP_REGIONS 4u
+#define MAX_HEAP_REGIONS 16u
 #endif
 
 #ifndef SBRK_ALIGN
@@ -59,6 +67,9 @@ static int heap_grow(struct _reent *r, size_t min_bytes)
         return -1;
     }
 
+    /* Minimum region — satisfies min_bytes while amortising syscall cost. */
+    if (min_bytes < MIN_REGION_BYTES)
+        min_bytes = MIN_REGION_BYTES;
     len = round_up_pages(min_bytes);
     base = sys_mmap(len);
     if (base == (void*)-1 || base == NULL) {

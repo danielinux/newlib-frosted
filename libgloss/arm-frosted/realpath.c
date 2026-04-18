@@ -8,7 +8,6 @@
 
 
 extern int readlink(const char* file, char *buf, size_t len);
-extern void* malloc(int size);
 extern char* getcwd(char *buf, size_t size);
 extern int lstat(const char* path, struct stat* buf);
 

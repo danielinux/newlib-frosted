@@ -66,7 +66,8 @@ OBJS = crt0.o crtn.o frosted_syscalls.o syscall.o syscalls.o errno.o svc.o \
 	   listen.o accept.o bind.o connect.o recvfrom.o sendto.o getsockname.o \
 	   getpeername.o setsockopt.o getsockopt.o \
 	   tcsetattr.o tcgetattr.o tcsendbreak.o unlink.o stubs.o mount.o umount.o \
-	   pthread.o mmap.o signal.o ptrace.o
+	   pthread.o mmap.o signal.o ptrace.o realpath.o getaddrinfo.o \
+	   mkdir.o
 
 
 # Object files specific to particular targets.
@@ -79,7 +80,7 @@ GCC_LDFLAGS = `if [ -d ${objroot}/../gcc ] ; \
 CRTOBJS = #crt0.o
 OUTPUTS = libgloss.a $(CRTOBJS)
 
-NEWLIB_CFLAGS = `if [ -d ${objroot}/newlib ]; then echo -I${objroot}/newlib/targ-include -I${srcroot}/newlib/libc/include; fi` -ffunction-sections -fdata-sections
+NEWLIB_CFLAGS = `if [ -d ${objroot}/newlib ]; then echo -I${objroot}/newlib/targ-include -I${srcroot}/newlib/libc/include; fi` -ffunction-sections -fdata-sections -fPIC -msingle-pic-base -mno-pic-data-is-text-relative
 NEWLIB_LDFLAGS = `if [ -d ${objroot}/newlib ]; then echo -B${objroot}/newlib/ -L${objroot}/newlib/; fi`
 
 INCLUDES = -I. -I$(srcdir)/.. -I$(srcdir)/include
@@ -296,6 +297,12 @@ pthread.o: $(srcdir)/pthread.c
 
 ptrace.o: $(srcdir)/ptrace.c
 	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/ptrace.c -c -o ptrace.o
+
+realpath.o: $(srcdir)/realpath.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/realpath.c -c -o realpath.o
+
+getaddrinfo.o: $(srcdir)/getaddrinfo.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/getaddrinfo.c -c -o getaddrinfo.o
 
 stubs.o: $(srcdir)/stubs.c
 	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/stubs.c -c -o stubs.o

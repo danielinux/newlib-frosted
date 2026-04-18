@@ -8,15 +8,17 @@
 
 _syscall:
     #save_context
-#if defined(__ARM_ARCH_7M__)
+#if defined(__ARM_ARCH_8M_MAIN__) || defined(__ARM_ARCH_7M__)
     push {r4-r11}
-#elif defined(__ARM_ARCH_6M__)
+#elif defined(__ARM_ARCH_8M_BASE__) || defined(__ARM_ARCH_6M__)
     push {r4-r7}
     mov r4,r8
     mov r5,r9
     mov r6,r10
     mov r7,r11
     push {r4-r7}
+#else
+#error "Unsupported ARM architecture for syscall wrapper"
 #endif
 
     #actual SV Call
@@ -24,18 +26,17 @@ _syscall:
     svc 0
 
     #restore_context
-#if defined(__ARM_ARCH_7M__)
-#warning "Using ARMv7-M context save/restore"
-
+#if defined(__ARM_ARCH_8M_MAIN__) || defined(__ARM_ARCH_7M__)
     pop {r4-r11}
-#elif defined(__ARM_ARCH_6M__)
-#warning "Using ARMv6-M context save/restore"
+#elif defined(__ARM_ARCH_8M_BASE__) || defined(__ARM_ARCH_6M__)
     pop {r4-r7}
     mov r8,r4
     mov r9,r5
     mov r10,r6
     mov r11,r7
     pop {r4-r7}
+#else
+#error "Unsupported ARM architecture for syscall wrapper"
 #endif
 
     bx  lr      // Jump back to the caller.
