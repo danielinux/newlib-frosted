@@ -67,7 +67,7 @@ OBJS = crt0.o crtn.o frosted_syscalls.o syscall.o syscalls.o errno.o svc.o \
 	   getpeername.o setsockopt.o getsockopt.o \
 	   tcsetattr.o tcgetattr.o tcsendbreak.o unlink.o stubs.o mount.o umount.o \
 	   pthread.o mmap.o signal.o ptrace.o realpath.o getaddrinfo.o \
-	   mkdir.o
+	   mkdir.o dlfcn.o
 
 
 # Object files specific to particular targets.
@@ -303,6 +303,9 @@ realpath.o: $(srcdir)/realpath.c
 
 getaddrinfo.o: $(srcdir)/getaddrinfo.c
 	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/getaddrinfo.c -c -o getaddrinfo.o
+
+dlfcn.o: $(srcdir)/dlfcn.c
+	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/dlfcn.c -c -o dlfcn.o
 
 stubs.o: $(srcdir)/stubs.c
 	$(CC) $(CFLAGS_FOR_TARGET) $(INCLUDES) $(CFLAGS) $(srcdir)/stubs.c -c -o stubs.o
